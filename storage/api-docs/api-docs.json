@@ -1,0 +1,1528 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Visca Corporation API",
+        "description": "Dokumentasi Open Api Visca Corporation",
+        "contact": {
+            "email": "bimasaktiputra95@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000",
+            "description": "Server Local"
+        }
+    ],
+    "paths": {
+        "/v1/kategori/list": {
+            "get": {
+                "tags": [
+                    "Kategori"
+                ],
+                "summary": "List Data Kategori Produk",
+                "description": "List Data Kategori Produk",
+                "operationId": "List Data Kategori Produk",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Tipe pencarian berdasarkan nama kategori produk",
+                        "required": false,
+                        "schema": {
+                            "type": "text"
+                        },
+                        "example": "Kebutuhan Pokok"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List Data Kategori Produk",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": [
+                                                    "List Data Kategori Produk"
+                                                ]
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/kategori/tambah-baru": {
+            "post": {
+                "tags": [
+                    "Kategori"
+                ],
+                "summary": "Tambah data kategori produk baru",
+                "description": "Tambah data kategori produk baru",
+                "operationId": "Tambah data kategori produk baru",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nama Kategori Produk Baru",
+                                        "type": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil menambahkan kategori baru",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil menambahkan kategori baru"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Penambahan kategori produk gagal, periksa kembali data validasi anda",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Penambahan kategori produk gagal, cek kembali validasi anda"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/kategori/update-data/{id}": {
+            "put": {
+                "tags": [
+                    "Kategori"
+                ],
+                "summary": "Update data kategori produk",
+                "description": "Update data kategori produk",
+                "operationId": "Update data kategori produk",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id kategori produk",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nama kategori produk baru, yang akan menggantikan nama kategori lama",
+                                        "type": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil update data kategori produk",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil update data kategori produk"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data kategori tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data kategori tidak ditemukan"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/kategori/hapus-data/{id}": {
+            "delete": {
+                "tags": [
+                    "Kategori"
+                ],
+                "summary": "Hapus data kategori produk",
+                "description": "Hapus data kategori produk",
+                "operationId": "Hapus data kategori produk",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id data kategori produk yang akan di hapus",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Berhasil menghapus data kategori",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil menghapus data kategori"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Terjadi kesalahan saat menghapus data kategori",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Terjadi kesalahan saat menghapus data kategori"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data produk tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data produk tidak ditemukan"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/pelanggan/list": {
+            "get": {
+                "tags": [
+                    "Pelanggan"
+                ],
+                "summary": "List Data Pelanggan Visca Corporation",
+                "description": "List Data Pelanggan Visca Corporation",
+                "operationId": "List Data Pelanggan Visca Corporation",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Tipe pencarian berdasarkan nama pelanggan",
+                        "required": false,
+                        "schema": {
+                            "type": "text"
+                        },
+                        "example": "Sumiati Bodjong"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List Data Pelanggan Visca Corporation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": [
+                                                    "List Data Pelanggan Visca Corporation"
+                                                ]
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/pelanggan/tambah-baru": {
+            "post": {
+                "tags": [
+                    "Pelanggan"
+                ],
+                "summary": "Tambah data pelanggan baru",
+                "description": "Tambah data pelanggan baru",
+                "operationId": "Tambah data pelanggan baru",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "telp"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nama Pelanggan Baru",
+                                        "type": "text"
+                                    },
+                                    "telp": {
+                                        "description": "No telpon pelanggan baru",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil menambahkan data client",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil menambahkan data client"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Penambahan pelanggan baru gagal, periksa kembali data validasi anda",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Penambahan pelanggan baru gagal, cek kembali validasi anda"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/pelanggan/update-data/{id}": {
+            "put": {
+                "tags": [
+                    "Pelanggan"
+                ],
+                "summary": "Update data pelanggan",
+                "description": "Update data pelanggan",
+                "operationId": "Update data pelanggan",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id pelanggan yang akan di ubah",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "telp"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nama pelanggan baru",
+                                        "type": "text"
+                                    },
+                                    "telp": {
+                                        "description": "No telpon pelanggan baru",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil update data pelanggan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil update data pelanggan"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data Pelanggan tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data Pelanggan tidak ditemukan"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/pelanggan/hapus-data/{id}": {
+            "delete": {
+                "tags": [
+                    "Pelanggan"
+                ],
+                "summary": "Hapus data pelanggan",
+                "description": "Hapus data pelanggan",
+                "operationId": "Hapus data pelanggan",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id data pelanggan yang akan di hapus",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Berhasil menghapus data pelanggan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil menghapus data pelanggan"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Terjadi kesalahan saat menghapus data pelanggan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Terjadi kesalahan saat menghapus data pelanggan"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data pelanggan tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data pelanggan tidak ditemukan"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/otentikasi/masuk": {
+            "post": {
+                "tags": [
+                    "Autentikasi"
+                ],
+                "summary": "User Login",
+                "description": "Login pengguna qollega (owner, pic, kasir, staff)",
+                "operationId": "Login",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "Akun email aktif yang sudah di aktivasi",
+                                        "type": "email"
+                                    },
+                                    "password": {
+                                        "description": "Password akun",
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Login Berhasil",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Gagal login, akun belum diverifikasi / Akun anda belum terdaftar di sistem kami"
+                    }
+                }
+            }
+        },
+        "/v1/otentikasi/daftar": {
+            "post": {
+                "tags": [
+                    "Autentikasi"
+                ],
+                "summary": "Pendaftaran Akun",
+                "description": "Pendaftaran Akun Merchant",
+                "operationId": "Pendaftaran Akun Merchant",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nama Lengkap Pengguna",
+                                        "type": "text"
+                                    },
+                                    "email": {
+                                        "description": "Alamat Email yang akan di daftarkan",
+                                        "type": "text"
+                                    },
+                                    "password": {
+                                        "description": "Password Pengguna",
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil mendaftarkan akun, silahkan login",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Pendaftaran gagal, periksa kembali data validasi anda",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/produk/list": {
+            "get": {
+                "tags": [
+                    "Produk"
+                ],
+                "summary": "List Data Produk Master",
+                "description": "List Data Produk Master",
+                "operationId": "List Data Produk Master",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Halaman page data untuk ditampilkan",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Sort data berdasarkan id ketegori",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Tipe pencarian berdasarkan nama produk",
+                        "required": false,
+                        "schema": {
+                            "type": "text"
+                        },
+                        "example": "Nasi Goreng Ayam"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List Data Produk Master",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": [
+                                                    "List Data Produk Master"
+                                                ]
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/produk/tambah-baru": {
+            "post": {
+                "tags": [
+                    "Produk"
+                ],
+                "summary": "Tambah data produk master",
+                "description": "Tambah data produk master",
+                "operationId": "Tambah data produk master",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "category_id",
+                                    "name",
+                                    "modal",
+                                    "price",
+                                    "stock",
+                                    "satuan",
+                                    "is_jual"
+                                ],
+                                "properties": {
+                                    "category_id": {
+                                        "description": "Id kategori untuk produk yang akan ditambahkan",
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "description": "Nama Produk",
+                                        "type": "text"
+                                    },
+                                    "modal": {
+                                        "description": "Harga Beli Produk",
+                                        "type": "integer"
+                                    },
+                                    "price": {
+                                        "description": "Harga Jual Produk",
+                                        "type": "integer"
+                                    },
+                                    "stock": {
+                                        "description": "Jumlah stock produk yang akan ditambahkan",
+                                        "type": "integer"
+                                    },
+                                    "satuan": {
+                                        "description": "Satuan stock beli / jual",
+                                        "type": "string",
+                                        "enum": [
+                                            "pcs",
+                                            "bundle"
+                                        ]
+                                    },
+                                    "is_jual": {
+                                        "description": "Jika produk di jual (true) jika tidak (false)",
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil menambahkan data produk",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil menambahkan data produk"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Penambahan produk gagal, periksa kembali data validasi anda",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Penambahan produk gagal, cek kembali validasi anda"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/produk/detail/{id}": {
+            "get": {
+                "tags": [
+                    "Produk"
+                ],
+                "summary": "Detail data produk",
+                "description": "Detail data produk",
+                "operationId": "Detail data produk",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id Produk",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data detail produk berdasarkan id",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": [
+                                                    "Data detail produk berdasarkan id"
+                                                ]
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data detail produk tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data detail produk tidak ditemukan"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/produk/update-data/{id}": {
+            "put": {
+                "tags": [
+                    "Produk"
+                ],
+                "summary": "Update data produk",
+                "description": "Update data produk",
+                "operationId": "Update data produk",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id produk merchant",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "modal",
+                                    "price",
+                                    "is_active",
+                                    "is_jual"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nama produk baru",
+                                        "type": "text"
+                                    },
+                                    "modal": {
+                                        "description": "Harga Beli baru",
+                                        "type": "integer"
+                                    },
+                                    "price": {
+                                        "description": "Harga Jual baru",
+                                        "type": "integer"
+                                    },
+                                    "is_active": {
+                                        "description": "Nonaktifkan produk",
+                                        "type": "boolean"
+                                    },
+                                    "is_jual": {
+                                        "description": "Tampilkan produk untuk di jual",
+                                        "type": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil update data produk",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil update data produk"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data produk tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data produk tidak ditemukan"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/produk/hapus-data/{id}": {
+            "delete": {
+                "tags": [
+                    "Produk"
+                ],
+                "summary": "Hapus data produk",
+                "description": "Hapus data produk",
+                "operationId": "Hapus data produk",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id data produk yang akan di hapus",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Berhasil menghapus data produk",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil menghapus data produk"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Terjadi kesalahan saat hapus data produk",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Terjadi kesalahan saat hapus data produk"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data produk tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data produk tidak ditemukan"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/transaksi/list-produk": {
+            "get": {
+                "tags": [
+                    "Transaksi"
+                ],
+                "summary": "List Data Produk Transaksi",
+                "description": "List Data Produk Transaksi",
+                "operationId": "List Data Produk Transaksi",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Halaman page data untuk ditampilkan",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Sort data berdasarkan id ketegori",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Tipe pencarian berdasarkan nama produk",
+                        "required": false,
+                        "schema": {
+                            "type": "text"
+                        },
+                        "example": "Nasi Goreng Ayam"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List Data Produk Transaksi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": [
+                                                    "List Data Produk Transaksi"
+                                                ]
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/transaksi/buat-transaksi": {
+            "post": {
+                "tags": [
+                    "Transaksi"
+                ],
+                "summary": "Buat Transaksi Penjualan ke customer open bill / transaksi lunas",
+                "description": "Buat Transaksi Penjualan ke customer open bill / transaksi lunas",
+                "operationId": "Buat Transaksi Penjualan ke customer open bill / transaksi lunas",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "transaction_id",
+                                    "client_id",
+                                    "taxer_id",
+                                    "discount_id",
+                                    "discount_temp_id",
+                                    "other_id",
+                                    "other_temp_id",
+                                    "taxrate",
+                                    "biaya_layanan",
+                                    "discount_nom",
+                                    "biaya_tambahan",
+                                    "grandtotal",
+                                    "amount",
+                                    "method",
+                                    "tipe_pembayaran"
+                                ],
+                                "properties": {
+                                    "transaction_id": {
+                                        "description": "0 Untuk transaksi baru",
+                                        "type": "integer"
+                                    },
+                                    "client_id": {
+                                        "description": "Id client / id pembeli",
+                                        "type": "integer"
+                                    },
+                                    "grandtotal": {
+                                        "description": "Jumlah grandtotal penjualan",
+                                        "type": "integer"
+                                    },
+                                    "amount": {
+                                        "description": "Jumlah pembayaran transaksi",
+                                        "type": "integer"
+                                    },
+                                    "payment_id": {
+                                        "description": "Id Payment yang akan digunakan",
+                                        "type": "integer"
+                                    },
+                                    "details": {
+                                        "description": "Details data transaksi produk",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "description": "Id detail penjualan, 0 untuk menambahkan produk transaksi untuk transaksi open bill",
+                                                    "type": "integer"
+                                                },
+                                                "product_id": {
+                                                    "description": "id produk terpilih yang ingin di transaksikan",
+                                                    "type": "integer"
+                                                },
+                                                "price": {
+                                                    "description": "Harga jual produk",
+                                                    "type": "integer"
+                                                },
+                                                "qty": {
+                                                    "description": "Kuantitas Pembelian Produk",
+                                                    "type": "string"
+                                                },
+                                                "total": {
+                                                    "description": "Total harga per kuantitas produknya",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil membuat transaksi baru",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolval",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil membuat transaksi baru"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Transaksi gagal, cek kembali no reff dan validasi anda",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Transaksi gagal, cek kembali no reff dan validasi anda"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/transaksi/list-penjualan": {
+            "get": {
+                "tags": [
+                    "Transaksi"
+                ],
+                "summary": "Data transaksi penjualan",
+                "description": "Data transaksi penjualan",
+                "operationId": "Data transaksi penjualan",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page untuk paginate data (1,2,3,dst)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Pencarian transaksi dengan no reff",
+                        "required": false,
+                        "schema": {
+                            "type": "text"
+                        },
+                        "example": "jhon"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data transaksi penjualan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": [
+                                                    "Data transaksi penjualan"
+                                                ]
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/v1/transaksi/list-openbill": {
+            "get": {
+                "tags": [
+                    "Transaksi"
+                ],
+                "summary": "Data transaksi penjualan open bill",
+                "description": "Data transaksi penjualan open bill",
+                "operationId": "Data transaksi penjualan open bill",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page untuk paginate data (1,2,3,dst)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Pencarian transaksi dengan no reff",
+                        "required": false,
+                        "schema": {
+                            "type": "text"
+                        },
+                        "example": "jhon"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data transaksi penjualan open bill",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": [
+                                                    "Data transaksi penjualan open bill"
+                                                ]
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}
